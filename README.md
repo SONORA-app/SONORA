@@ -13,7 +13,7 @@ A distraction-free, hardware-inspired Android music appliance designed for desk 
 
 <br />
 
-<img src="./screenshots/screenshot01.jpg" alt="Sonora UI in action" width="700" style="border-radius: 12px;" />
+<img src="./screenshots/screenshot 01.jpg" alt="Sonora UI in action" width="700" style="border-radius: 12px;" />
 
 <br />
 <br />
