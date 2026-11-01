@@ -45,7 +45,7 @@ Whether mounted horizontally on a charging cradle or carried on the go, Sonora r
 ## Screenshots
 
 <div align="center">
-  <img src="./screenshots/screenshot 01.jpg" width="48%" style="border-radius: 8px;" />
+  <img src="./screenshots/screenshot07.jpg" width="48%" style="border-radius: 8px;" />
   <img src="./screenshots/screenshot02.jpg" width="48%" style="border-radius: 8px;" />
 </div>
 <div align="center" style="margin-top: 10px;">
