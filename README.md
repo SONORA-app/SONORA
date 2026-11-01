@@ -8,6 +8,7 @@ A distraction-free, hardware-inspired Android music appliance designed for desk 
 
 [![GitHub Release](https://img.shields.io/github/v/release/SONORA-app/SONORA?color=1ed760&style=flat-square)](https://github.com/SONORA-app/SONORA/releases)
 [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://github.com/SONORA-app/SONORA)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/F4eTRQhrxe)
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)](#license)
 [![Website](https://img.shields.io/badge/Live-Demo-blue?style=flat-square)](https://sonora-app.github.io/SONORA/)
 
@@ -18,7 +19,7 @@ A distraction-free, hardware-inspired Android music appliance designed for desk 
 <br />
 <br />
 
-[**Download Latest APK**](https://github.com/SONORA-app/SONORA/releases) • [**View Live Site**](https://sonora-app.github.io/SONORA/) • [**Report an Issue**](https://github.com/SONORA-app/SONORA/issues)
+[**Download Latest APK**](https://github.com/SONORA-app/SONORA/releases) • [**View Live Site**](https://sonora-app.github.io/SONORA/) • [**Join Discord**](https://discord.gg/F4eTRQhrxe) • [**Report an Issue**](https://github.com/SONORA-app/SONORA/issues)
 
 </div>
 
@@ -34,11 +35,11 @@ Whether mounted horizontally on a charging cradle or carried on the go, Sonora r
 
 ## Key Features
 
-* **Ambient Palette Glow:** Dynamically samples live album art to generate an adaptive backlight glow across your dashboard.
-* **Rotary Dial & Tactile Haptics:** Physical audio hardware-inspired circular dial with haptic feedback ticks as you adjust gain.
-* **Synchronized Live Lyrics:** Real-time, line-by-line lyric tracking integrated directly into the main playback screen without switching views.
-* **OLED Standby Mode:** Low-power burn-in protection displaying an ultra-minimal standby clock and track monitor during idle sessions.
-* **Distraction-Free Architecture:** Pure playback deck. No feeds, ads, social integrations, or notification interruptions.
+- **Ambient Palette Glow:** Dynamically samples live album art to generate an adaptive backlight glow across your dashboard.
+- **Rotary Dial & Tactile Haptics:** Physical audio hardware-inspired circular dial with haptic feedback ticks as you adjust gain.
+- **Synchronized Live Lyrics:** Real-time, line-by-line lyric tracking integrated directly into the main playback screen without switching views.
+- **OLED Standby Mode:** Low-power burn-in protection displaying an ultra-minimal standby clock and track monitor during idle sessions.
+- **Distraction-Free Architecture:** Pure playback deck. No feeds, ads, social integrations, or notification interruptions.
 
 ---
 
@@ -67,14 +68,15 @@ Whether mounted horizontally on a charging cradle or carried on the go, Sonora r
 
 ## Compatibility
 
-* **Target OS:** Android 8.0 (Oreo) and above.
-* **Display Support:** Optimized for standard smartphones, landscape desk cradles, and OLED displays.
+- **Target OS:** Android 8.0 (Oreo) and above.
+- **Display Support:** Optimized for standard smartphones, landscape desk cradles, and OLED displays.
 
 ---
 
-## Bug Reports & Feature Requests
+## Community & Feedback
 
-Found an issue with media session controls, artwork extraction, or lyric sync? Please submit an issue via the [GitHub Issue Tracker](https://github.com/SONORA-app/SONORA/issues).
+- **Discord:** Join the [SONORA Discord Community](https://discord.gg/F4eTRQhrxe) to share desk setups, discuss feature ideas, and chat with other users.
+- **Issue Tracker:** Found a bug with media controls, artwork extraction, or lyric sync? Please submit an issue via the [GitHub Issue Tracker](https://github.com/SONORA-app/SONORA/issues).
 
 ---
 
