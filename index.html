@@ -1,278 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SONORA - Your music. Nothing else.</title>
+    <title>SONORA — Your music. Nothing else.</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    colors: {
-                        black: '#050505',
-                        panel: '#111111',
-                        border: 'rgba(255, 255, 255, 0.08)'
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #050505;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #07080A;
             color: #ffffff;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
-        /* Smooth transition for the ambient glow */
-        :root {
-            --ambient-color: #dc2626; /* Default red/crimson */
+        .hardware-bezel {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0,0,0,0.5);
+            background: #111318;
         }
-
-        #ambient-glow {
-            background: radial-gradient(circle at center, var(--ambient-color) 0%, transparent 60%);
-            transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s ease;
-        }
-
-        .hardware-mockup {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 1), 0 0 0 1px rgba(255,255,255,0.05) inset;
-        }
-
-        /* Rotary dial CSS styling */
-        .rotary-dial {
-            background: conic-gradient(from 180deg, transparent 0deg, var(--ambient-color) 120deg, transparent 120deg);
-            transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        .ambient-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(255,130,80,0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            filter: blur(40px);
+            transition: background 0.5s ease;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative overflow-x-hidden selection:bg-white selection:text-black">
+<body class="min-h-screen flex flex-col items-center justify-center p-6 antialiased">
 
-    <!-- Ambient Glow Background (tied to JS) -->
-    <div id="ambient-glow" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vh] opacity-20 blur-[120px] pointer-events-none z-0"></div>
-
-    <!-- Navigation -->
-    <nav class="relative z-20 w-full max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-white text-black rounded-lg flex items-center justify-center font-bold text-xl tracking-tighter">
-                S
-            </div>
-            <span class="font-mono text-xs text-zinc-500 tracking-widest uppercase">Deck 1.1</span>
+    <!-- Top Header -->
+    <header class="w-full max-w-5xl flex justify-between items-center py-6 absolute top-0">
+        <div class="flex items-center gap-3 text-sm font-bold tracking-widest text-white">
+            SONORA <span class="px-2 py-0.5 rounded bg-white/10 text-white/70 text-xs">DECK 1.1</span>
         </div>
-        <a href="https://github.com/SONORA-app/SONORA" target="_blank" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-            <i class="fa-brands fa-github text-lg"></i> GitHub
-        </a>
-    </nav>
+    </header>
 
     <!-- Main Content -->
-    <main class="relative z-10 flex-grow flex flex-col items-center w-full max-w-7xl mx-auto px-6 pt-12 pb-24">
-        
-        <!-- Hero Section -->
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 leading-[1.1]">
-                SONORA
-            </h1>
-            <h2 class="text-2xl md:text-3xl font-medium tracking-tight mb-4">
-                Your music. Nothing else.
-            </h2>
-            <p class="text-lg md:text-xl text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed">
-                A distraction-free Android audio deck engineered for your desk. Pure tactile controls and adaptive palette glow.
-            </p>
-        </div>
+    <main class="w-full max-w-5xl mt-24 flex flex-col items-center text-center">
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4">Your music. Nothing else.</h1>
+        <p class="text-lg text-gray-400 max-w-2xl mb-10">
+            The distraction-free Android audio deck engineered for your desk stand and mobile listening. Pure tactile controls and adaptive palette glow.
+        </p>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 mb-24 w-full sm:w-auto">
-            <a href="#" class="px-8 py-4 bg-white text-black font-semibold rounded-full hover:scale-105 hover:bg-zinc-200 transition-all flex items-center justify-center gap-2 group">
-                <i class="fa-solid fa-download transition-transform group-hover:-translate-y-1"></i> Download APK
+        <div class="flex gap-4 mb-16">
+            <a href="https://github.com/SONORA-app/SONORA/releases" class="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Download APK
             </a>
-            <a href="https://discord.gg/F4eTRQhrxe" target="_blank" class="px-8 py-4 bg-[#1a1a1a] text-white border border-border font-medium rounded-full hover:bg-[#222] transition-all flex items-center justify-center gap-2">
-                <i class="fa-brands fa-discord"></i> Join Discord
+            <a href="https://github.com/SONORA-app/SONORA" class="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+                GitHub Repository
             </a>
         </div>
 
-        <!-- Interactive Mockup Showcase -->
-        <div class="w-full flex flex-col items-center mb-32 relative">
-            
-            <!-- Controls -->
-            <div class="w-full flex justify-between items-center mb-6 px-4 md:px-8 max-w-5xl">
-                <div class="font-mono text-xs text-zinc-500 tracking-widest uppercase">Live Demo</div>
-                <button id="cycle-btn" class="px-4 py-2 bg-panel border border-border text-xs font-mono uppercase tracking-wider rounded-md hover:bg-white hover:text-black transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-rotate-right"></i> Cycle Artwork
-                </button>
+        <!-- Live Demo Device Frame -->
+        <div class="relative w-full max-w-4xl mb-8">
+            <div class="ambient-glow" id="glow-layer"></div>
+            <!-- Using strict relative paths starting with ./ to ensure GitHub Pages resolves them inside your repository -->
+            <div class="hardware-bezel rounded-[2rem] p-4 w-full aspect-[21/9] relative overflow-hidden bg-black flex items-center justify-center">
+                <img id="demo-screen" src="./screenshots/screenshot03.jpg" alt="Sonora UI" class="w-full h-full object-cover rounded-xl transition-opacity duration-300">
             </div>
-
-            <!-- Hardware Container -->
-            <div class="hardware-mockup w-full max-w-5xl aspect-[18/9] md:aspect-[21/9] bg-[#0a0a0c] rounded-[2rem] md:rounded-[3rem] border border-border relative overflow-hidden flex items-center p-6 md:p-12">
-                
-                <!-- Screen Content (Landscape Player) -->
-                <div class="w-full h-full flex items-center justify-between gap-8 z-10">
-                    
-                    <!-- Left: Album Art & Meta -->
-                    <div class="flex items-center gap-8 w-1/2">
-                        <!-- Album Art Image -->
-                        <div class="relative w-40 h-40 md:w-56 md:h-56 shrink-0">
-                            <!-- Glow directly behind image -->
-                            <div id="art-glow" class="absolute inset-0 blur-2xl opacity-60 rounded-xl transition-colors duration-1000" style="background-color: var(--ambient-color);"></div>
-                            <img id="album-art" src="https://placehold.co/400x400/dc2626/ffffff?text=Traffic" alt="Album Art" class="relative w-full h-full object-cover rounded-xl shadow-2xl transition-opacity duration-500">
-                        </div>
-                        
-                        <div class="flex flex-col overflow-hidden">
-                            <span class="font-mono text-xs text-zinc-500 mb-2 truncate" id="artist-name">maryjo</span>
-                            <h3 class="text-3xl md:text-5xl font-bold tracking-tight truncate mb-1" id="track-name">Traffic</h3>
-                        </div>
-                    </div>
-
-                    <!-- Right: Transport & Dial -->
-                    <div class="w-1/2 flex flex-col items-end justify-center">
-                        
-                        <!-- Rotary Dial Representation -->
-                        <div class="relative w-32 h-32 md:w-48 md:h-48 rounded-full border border-[#1a1a1a] flex items-center justify-center bg-[#070707] shadow-inner mb-8">
-                            <!-- Arc indicator -->
-                            <div class="rotary-dial absolute inset-[-2px] rounded-full z-0 pointer-events-none opacity-80"></div>
-                            <!-- Inner dial -->
-                            <div class="absolute inset-[4px] bg-[#0f0f11] rounded-full z-10 flex items-center justify-center border border-border shadow-2xl">
-                                <i class="fa-solid fa-volume-high text-xl text-zinc-600"></i>
-                            </div>
-                        </div>
-
-                        <!-- Minimal Transport -->
-                        <div class="flex items-center gap-8 text-zinc-400">
-                            <i class="fa-solid fa-shuffle text-sm hover:text-white cursor-pointer transition-colors"></i>
-                            <i class="fa-solid fa-backward-step text-xl hover:text-white cursor-pointer transition-colors"></i>
-                            <div class="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center cursor-pointer hover:scale-105 transition-transform">
-                                <i class="fa-solid fa-pause text-2xl"></i>
-                            </div>
-                            <i class="fa-solid fa-forward-step text-xl hover:text-white cursor-pointer transition-colors"></i>
-                            <i class="fa-regular fa-heart text-xl hover:text-white cursor-pointer transition-colors"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Subtle screen glare -->
-                <div class="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none rounded-t-[3rem]"></div>
+            
+            <div class="flex justify-between items-center mt-6 text-xs tracking-widest text-gray-500 font-semibold uppercase">
+                <span>SONORA DECK // LIVE DEMO</span>
+                <button onclick="cycleImage()" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 text-white transition-colors border border-white/10">
+                    ⟳ Cycle Artwork
+                </button>
             </div>
         </div>
 
         <!-- Specs Grid -->
-        <div class="w-full max-w-7xl">
-            <h3 class="font-mono text-xs text-zinc-600 tracking-widest uppercase mb-6 ml-2">Engineered Specs</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <!-- Card 1 -->
-                <div class="bg-panel rounded-2xl p-8 border border-border hover:border-zinc-700 transition-colors">
-                    <div class="font-mono text-xs text-zinc-500 mb-4">01 // GLOW</div>
-                    <h4 class="text-xl font-bold mb-3">Ambient Extraction</h4>
-                    <p class="text-zinc-400 text-sm leading-relaxed">
-                        Pulls dynamic color spectra from live album artwork to wash your desk in soft backlight.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-panel rounded-2xl p-8 border border-border hover:border-zinc-700 transition-colors">
-                    <div class="font-mono text-xs text-zinc-500 mb-4">02 // HAPTICS</div>
-                    <h4 class="text-xl font-bold mb-3">Rotary Touch Dial</h4>
-                    <p class="text-zinc-400 text-sm leading-relaxed">
-                        Hardware-inspired circular rotary dial providing tactile haptic ticks as you tweak volume.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-panel rounded-2xl p-8 border border-border hover:border-zinc-700 transition-colors">
-                    <div class="font-mono text-xs text-zinc-500 mb-4">03 // LYRICS</div>
-                    <h4 class="text-xl font-bold mb-3">Synced Typography</h4>
-                    <p class="text-zinc-400 text-sm leading-relaxed">
-                        Scrollable, line-by-line synchronized lyrics positioned directly inside the main playback dashboard.
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-panel rounded-2xl p-8 border border-border hover:border-zinc-700 transition-colors">
-                    <div class="font-mono text-xs text-zinc-500 mb-4">04 // OLED</div>
-                    <h4 class="text-xl font-bold mb-3">Standby Clock</h4>
-                    <p class="text-zinc-400 text-sm leading-relaxed">
-                        Ultra-low power standby mode featuring a minimal clock and burn-in prevention for OLED screens.
-                    </p>
-                </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-4xl text-left border-t border-white/10 pt-12 mt-4 pb-12">
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/5">
+                <div class="text-xs text-gray-500 tracking-widest mb-3">01 // GLOW</div>
+                <h3 class="text-white font-bold mb-2">Ambient Extraction</h3>
+                <p class="text-gray-400 text-sm">Pulls dynamic color spectra from live album artwork to wash your desk in soft backlight.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/5">
+                <div class="text-xs text-gray-500 tracking-widest mb-3">02 // HAPTICS</div>
+                <h3 class="text-white font-bold mb-2">Rotary Touch Dial</h3>
+                <p class="text-gray-400 text-sm">Hardware-inspired circular rotary dial providing tactile haptic ticks as you tweak volume.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/5">
+                <div class="text-xs text-gray-500 tracking-widest mb-3">03 // LYRICS</div>
+                <h3 class="text-white font-bold mb-2">Synced Typography</h3>
+                <p class="text-gray-400 text-sm">Scrollable, line-by-line synchronized lyrics directly inside the main playback dashboard.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/5">
+                <div class="text-xs text-gray-500 tracking-widest mb-3">04 // OLED</div>
+                <h3 class="text-white font-bold mb-2">Standby Clock</h3>
+                <p class="text-gray-400 text-sm">Ultra-low power standby mode with minimal clock and burn-in prevention for OLED screens.</p>
             </div>
         </div>
-
     </main>
 
-    <footer class="w-full text-center py-8 border-t border-border mt-12 relative z-10">
-        <p class="font-mono text-xs text-zinc-600">© 2026 SONORA. All Rights Reserved.</p>
-    </footer>
-
-    <!-- Interactive Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const root = document.documentElement;
-            const cycleBtn = document.getElementById('cycle-btn');
-            const albumArt = document.getElementById('album-art');
-            const trackName = document.getElementById('track-name');
-            const artistName = document.getElementById('artist-name');
+        // Use exact relative paths mapped to the real files in your /screenshots/ folder
+        const images = [
+            './screenshots/screenshot03.jpg',
+            './screenshots/screenshot07.jpg',
+            './screenshots/screenshot02.jpg',
+            './screenshots/screenshot11.jpg',
+            './screenshots/screenshot05.jpg'
+        ];
+        
+        let currentIndex = 0;
+        const imgElement = document.getElementById('demo-screen');
+        const glowElement = document.getElementById('glow-layer');
 
-            // Themes representing different songs/artworks
-            const themes = [
-                {
-                    color: '#dc2626', // Crimson
-                    img: 'https://placehold.co/400x400/dc2626/ffffff?text=Traffic',
-                    track: 'Traffic',
-                    artist: 'maryjo'
-                },
-                {
-                    color: '#10b981', // Emerald
-                    img: 'https://placehold.co/400x400/10b981/ffffff?text=FML',
-                    track: 'FML',
-                    artist: 'Arizona Zervas'
-                },
-                {
-                    color: '#8b5cf6', // Violet
-                    img: 'https://placehold.co/400x400/8b5cf6/ffffff?text=Usseewa',
-                    track: 'Usseewa',
-                    artist: 'Ado'
-                },
-                {
-                    color: '#f59e0b', // Amber
-                    img: 'https://placehold.co/400x400/f59e0b/ffffff?text=AiAiA',
-                    track: 'AiAiA',
-                    artist: 'Ado'
-                }
-            ];
+        // Optional: Fake glow colors to match the cycled screenshots
+        const glowColors = [
+            'rgba(255,130,80,0.15)',  // For screenshot03
+            'rgba(100,150,255,0.15)', // For screenshot07
+            'rgba(255,80,80,0.15)',   // For screenshot02
+            'rgba(200,200,200,0.15)', // For screenshot11
+            'rgba(180,100,255,0.15)'  // For screenshot05
+        ];
 
-            let currentIndex = 0;
-
-            cycleBtn.addEventListener('click', () => {
-                // Increment and wrap around
-                currentIndex = (currentIndex + 1) % themes.length;
-                const nextTheme = themes[currentIndex];
-
-                // Fade out image slightly for smooth transition
-                albumArt.style.opacity = '0.5';
+        function cycleImage() {
+            imgElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                imgElement.src = images[currentIndex];
+                glowElement.style.background = `radial-gradient(circle, ${glowColors[currentIndex]} 0%, rgba(0,0,0,0) 70%)`;
                 
-                setTimeout(() => {
-                    // Update content
-                    albumArt.src = nextTheme.img;
-                    trackName.textContent = nextTheme.track;
-                    artistName.textContent = nextTheme.artist;
-                    
-                    // Update ambient glow CSS variable
-                    root.style.setProperty('--ambient-color', nextTheme.color);
-                    
-                    // Fade back in
-                    albumArt.style.opacity = '1';
-                }, 150); // Short delay matches the fade
-            });
-        });
+                imgElement.onload = () => {
+                    imgElement.style.opacity = 1;
+                };
+            }, 300);
+        }
     </script>
 </body>
 </html>
