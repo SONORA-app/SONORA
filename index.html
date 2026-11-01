@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SONORA — The Music Controller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-dim: #9ca3af;
+      --accent: #1ed760;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    /* Ambient background glow */
+    .ambient-bg {
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(120, 50, 255, 0.15) 0%, rgba(9, 10, 15, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 640px;
+      margin-top: 3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(30, 215, 96, 0.1);
+      border: 1px solid rgba(30, 215, 96, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    p.tagline {
+      font-size: 1.15rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Showcase frame */
+    .device-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 860px;
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+
+    .phone-bezel {
+      background: #16181f;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: 12px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.03);
+      position: relative;
+    }
+
+    .screen-img {
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    .shuffle-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .shuffle-hint:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Feature Highlights */
+    .features-grid {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+      color: #ffffff;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      font-size: 0.85rem;
+      color: #6b7280;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-bg"></div>
+
+  <header>
+    <div class="badge">Standalone Android Music Deck</div>
+    <h1>SONORA</h1>
+    <p class="tagline">
+      Your music. Nothing else. The best app for Android if you want a premium music controller on your desk or on the go.
+    </p>
+    <div class="cta-group">
+      <!-- Update YOUR_USERNAME and YOUR_REPO with your actual GitHub links -->
+      <a href="https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/app-release.apk" class="btn btn-primary">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10.011 10.011 0 0012 2zm1 14.59V8h-2v8.59l-3.29-3.3-1.42 1.42L12 20.42l5.71-5.71-1.42-1.42z"/></svg>
+        Download APK
+      </a>
+      <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" class="btn btn-secondary">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Interactive Screenshot Showcase with Randomizer -->
+  <section class="device-container">
+    <div class="phone-bezel">
+      <img id="screenshot" class="screen-img" src="" alt="Sonora UI in action" />
+    </div>
+    <div class="shuffle-hint" id="shuffle-btn">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h4l4 6-4 6H4m16-12h-4l-2 3m6 9h-4l-4-6"/></svg>
+      Click to view another track setup
+    </div>
+  </section>
+
+  <!-- Feature Grid -->
+  <section class="features-grid">
+    <div class="feature-card">
+      <h3>Ambient Palette Glow</h3>
+      <p>Pulls dominant colors straight from live album artwork to illuminate your desk with subtle, dynamic lighting.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Rotary Dial & Haptics</h3>
+      <p>Precision touch controls inspired by dedicated hardware, delivering real tactile ticks as you change volume.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Synchronized Lyrics</h3>
+      <p>Scrollable live lyrics synchronized line-by-line, toggleable instantly without leaving your dashboard view.</p>
+    </div>
+    <div class="feature-card">
+      <h3>OLED Standby Mode</h3>
+      <p>Automatically dims into an ultra-clean clock and track indicator to eliminate clutter and protect OLED panels from burn-in.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>SONORA &copy; 2026 — Designed for desk setups and dedicated dashboard displays.</p>
+  </footer>
+
+  <script>
+    // Add paths to your screenshot files here (e.g. inside a /screenshots/ folder)
+    const screenshots = [
+      'screenshots/shot1.jpg',
+      'screenshots/shot2.jpg',
+      'screenshots/shot3.jpg',
+      'screenshots/shot4.jpg',
+      'screenshots/shot5.jpg'
+    ];
+
+    const imgElement = document.getElementById('screenshot');
+    const shuffleBtn = document.getElementById('shuffle-btn');
+    let currentIndex = -1;
+
+    function pickRandomScreenshot() {
+      if (!screenshots.length) return;
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * screenshots.length);
+      } while (newIndex === currentIndex && screenshots.length > 1);
+
+      currentIndex = newIndex;
+
+      // Smooth fade transition
+      imgElement.style.opacity = '0.3';
+      setTimeout(() => {
+        imgElement.src = screenshots[currentIndex];
+        imgElement.onload = () => {
+          imgElement.style.opacity = '1';
+        };
+      }, 150);
+    }
+
+    // Pick a random screenshot on page load
+    pickRandomScreenshot();
+
+    // Allow manual shuffle on click
+    shuffleBtn.addEventListener('click', pickRandomScreenshot);
+  </script>
+</body>
+</html>
